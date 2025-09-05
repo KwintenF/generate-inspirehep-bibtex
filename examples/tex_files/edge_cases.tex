@@ -1,0 +1,48 @@
+\documentclass{revtex4-2}
+\usepackage{amsmath}
+
+\title{Edge Cases and Problematic Citations}
+\author{Dr. Edge Case}
+
+\begin{document}
+
+\maketitle
+
+\section{Version-specific arXiv citations}
+
+Papers with specific versions: \cite{2112.00006v1,2301.12345v2,1907.12345v3}.
+
+ArXiv citations with explicit prefix: \cite{arXiv:2112.00006,arXiv:hep-th/9803103,arXiv:2301.12345v1}.
+
+\section{Malformed citations}
+
+Empty citations should be ignored: \cite{}.
+
+Very long InspireHEP ID: \cite{123456789012345}.
+
+Suspicious formats: \cite{not-a-valid-format,123abc456,random_string_2023}.
+
+Mixed valid and invalid: \cite{1724847,,2112.00006,}.
+
+\section{Special characters and formatting}
+
+Citations with underscores: \cite{test_paper_2023,another_test_reference}.
+
+Citations with dashes: \cite{hep-th/0501001,some-paper-2022}.
+
+Multiple spaces and formatting issues: \cite{ 1724847 , 2112.00006 , spaced_key }.
+
+\section{Complex citation patterns}
+
+Nested or complex LaTeX: The result in Eq.~\eqref{eq:main} follows from \cite{1724847} and builds on earlier work \cite{hep-th/9803103,unknown_complicated_key_with_numbers_123_xyz}.
+
+\begin{equation}
+\label{eq:main}
+E = mc^2 \cite{1724847}
+\end{equation}
+
+% Multiple bibliography commands (should use the first one)
+\bibliography{edge_case_refs}
+\bibliography{should_be_ignored}
+
+\end{document}
