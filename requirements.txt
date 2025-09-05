@@ -1,0 +1,4 @@
+requests>=2.28.0
+gradio>=3.50.0
+bibtexparser>=1.4.0
+re
