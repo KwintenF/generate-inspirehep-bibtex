@@ -68,6 +68,37 @@ class InspireHEPClient:
             print(f"Network error searching for {arxiv_id}: {str(e)}")
             return None
     
+    def search_by_bibtex_key(self, bibtex_key: str) -> Optional[str]:
+        """Search for a paper by BibTeX key (e.g., Dumitrescu:2025vfp) and return BibTeX."""
+        url = f"{self.base_url}/literature"
+        
+        try:
+            # Search for the BibTeX key - InspireHEP supports searching by texkey
+            response = self.session.get(url, params={
+                'q': f'texkeys:"{bibtex_key}"',
+                'format': 'json'
+            })
+            
+            if response.status_code == 200:
+                data = response.json()
+                hits = data.get('hits', {}).get('hits', [])
+                
+                if hits:
+                    # Get the first result's record ID
+                    record_id = hits[0]['id']
+                    # Fetch BibTeX for this record
+                    return self.get_bibtex_by_inspirehep_id(str(record_id))
+                else:
+                    print(f"Warning: BibTeX key {bibtex_key} not found in InspireHEP")
+                    return None
+            else:
+                print(f"Error searching for BibTeX key {bibtex_key}: HTTP {response.status_code}")
+                return None
+                
+        except requests.RequestException as e:
+            print(f"Network error searching for {bibtex_key}: {str(e)}")
+            return None
+    
     def fetch_bibtex_entries(self, categorized_keys: dict) -> Dict[str, str]:
         """Fetch BibTeX entries for all categorized keys."""
         bibtex_entries = {}
@@ -78,6 +109,14 @@ class InspireHEPClient:
             bibtex = self.get_bibtex_by_inspirehep_id(inspirehep_id)
             if bibtex:
                 bibtex_entries[inspirehep_id] = bibtex
+            time.sleep(0.1)  # Be nice to the API
+        
+        # Process InspireHEP BibTeX keys
+        for bibtex_key in categorized_keys.get('inspirehep_bibtex', []):
+            print(f"Searching for BibTeX key {bibtex_key}...")
+            bibtex = self.search_by_bibtex_key(bibtex_key)
+            if bibtex:
+                bibtex_entries[bibtex_key] = bibtex
             time.sleep(0.1)  # Be nice to the API
         
         # Process arXiv IDs

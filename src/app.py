@@ -40,6 +40,7 @@ class BibTeXGeneratorApp:
             # Report what we found
             status_msg = f"Found {len(citations)} total citations:\n"
             status_msg += f"• InspireHEP IDs: {len(categorized_keys['inspirehep'])}\n"
+            status_msg += f"• InspireHEP BibTeX keys: {len(categorized_keys['inspirehep_bibtex'])}\n"
             status_msg += f"• arXiv IDs: {len(categorized_keys['arxiv'])}\n"
             status_msg += f"• Unknown keys: {len(categorized_keys['unknown'])}\n\n"
             

@@ -4,6 +4,7 @@ from enum import Enum
 
 class KeyType(Enum):
     INSPIREHEP = "inspirehep"
+    INSPIREHEP_BIBTEX = "inspirehep_bibtex"
     ARXIV = "arxiv"
     UNKNOWN = "unknown"
 
@@ -11,6 +12,9 @@ class KeyIdentifier:
     def __init__(self):
         # InspireHEP record IDs are typically numeric
         self.inspirehep_pattern = re.compile(r'^\d+$')
+        
+        # InspireHEP BibTeX key format: Author:YEARxxx (e.g., Dumitrescu:2025vfp)
+        self.inspirehep_bibtex_pattern = re.compile(r'^[A-Za-z][A-Za-z0-9_]*:\d{4}[a-zA-Z]{3}$')
         
         # arXiv patterns for different formats
         # New format: YYMM.NNNN[vN] or YYMM.NNNNvN
@@ -35,6 +39,10 @@ class KeyIdentifier:
         if self.arxiv_new_pattern.match(key) or self.arxiv_old_pattern.match(key):
             return KeyType.ARXIV
         
+        # Check InspireHEP BibTeX key format (Author:YEARxxx)
+        if self.inspirehep_bibtex_pattern.match(key):
+            return KeyType.INSPIREHEP_BIBTEX
+        
         # Check InspireHEP pattern (pure numeric)
         if self.inspirehep_pattern.match(key):
             return KeyType.INSPIREHEP
@@ -56,6 +64,7 @@ class KeyIdentifier:
         """Process a list of keys and categorize them."""
         result = {
             'inspirehep': [],
+            'inspirehep_bibtex': [],
             'arxiv': [],
             'unknown': []
         }
@@ -66,6 +75,8 @@ class KeyIdentifier:
             
             if key_type == KeyType.INSPIREHEP:
                 result['inspirehep'].append(normalized_key)
+            elif key_type == KeyType.INSPIREHEP_BIBTEX:
+                result['inspirehep_bibtex'].append(normalized_key)
             elif key_type == KeyType.ARXIV:
                 result['arxiv'].append(normalized_key)
             else:

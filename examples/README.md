@@ -56,6 +56,21 @@ This directory contains test cases for the InspireHEP BibTeX Generator.
 - Should warn about malformed keys
 - Should use first `\bibliography{}` command found
 
+### 4. `bibtex_keys.tex`
+**Purpose**: Test InspireHEP BibTeX key format citations.
+
+**Features**:
+- InspireHEP BibTeX keys in Author:YEARxxx format
+- Mix of BibTeX keys with other citation types
+- Some fake BibTeX keys to test warnings
+
+**Expected Citations**:
+- `Dumitrescu:2025vfp` (InspireHEP BibTeX key)
+- `Carleo:2019ptp` (InspireHEP BibTeX key)
+- `Preskill:2018fag` (InspireHEP BibTeX key)
+- `Biamonte:2017zfb` (InspireHEP BibTeX key)
+- Mixed with arXiv IDs and InspireHEP record IDs
+
 ## Usage
 
 To test manually:
@@ -69,6 +84,7 @@ To test manually:
 The test files include examples of:
 
 - **InspireHEP IDs**: `1724847`, `796859`, `1450044`
+- **InspireHEP BibTeX keys**: `Dumitrescu:2025vfp`, `Carleo:2019ptp`, `Preskill:2018fag`
 - **arXiv (new)**: `2112.00006`, `2301.12345`, `1907.12345`
 - **arXiv (old)**: `hep-th/9803103`, `astro-ph/0605709`, `gr-qc/0506127`
 - **arXiv with prefix**: `arXiv:2112.00006`, `arXiv:hep-th/9803103`

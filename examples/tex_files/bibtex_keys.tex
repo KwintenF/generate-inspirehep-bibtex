@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{cite}
+
+\title{InspireHEP BibTeX Keys Test}
+\author{Test Author}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This document tests InspireHEP BibTeX key format citations. The format follows Author:YEARxxx pattern.
+
+Recent advances in machine learning for physics \cite{Dumitrescu:2025vfp} show promising results. Earlier work on neural networks \cite{Carleo:2019ptp} laid the foundation.
+
+\section{Background}
+
+Quantum computing applications \cite{Preskill:2018fag} and quantum machine learning \cite{Biamonte:2017zfb} are emerging fields.
+
+Mixed citations combining different formats:
+\cite{Dumitrescu:2025vfp,2112.00006,1724847,Carleo:2019ptp}
+
+\section{Discussion}
+
+The theoretical framework \cite{Preskill:2018fag,hep-th/9803103} provides insights into quantum advantage.
+
+Some unknown BibTeX-like keys should generate warnings: \cite{Unknown:2023abc,FakeAuthor:2024xyz}.
+
+\bibliographystyle{JHEP}
+\bibliography{bibtex_test}
+
+\end{document}
