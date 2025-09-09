@@ -135,7 +135,7 @@ def create_interface():
     with gr.Blocks(title="InspireHEP BibTeX Generator", theme=gr.themes.Soft()) as interface:
         
         gr.Markdown("""
-        # 📚 InspireHEP BibTeX Generator
+        # InspireHEP BibTeX Generator
         
         Upload a LaTeX file with `\\cite{}` commands and automatically generate **both**:
         - **Standardized LaTeX file** with all citation keys converted to InspireHEP format
@@ -150,7 +150,7 @@ def create_interface():
         with gr.Row():
             with gr.Column(scale=2):
                 # Input section
-                gr.Markdown("### 📝 Input")
+                gr.Markdown("### Input")
                 
                 latex_file = gr.File(
                     label="Upload LaTeX file (.tex)",
@@ -165,14 +165,14 @@ def create_interface():
                 )
                 
                 process_btn = gr.Button(
-                    "🚀 Generate Files", 
+                    " Generate Files", 
                     variant="primary", 
                     size="lg"
                 )
                 
             with gr.Column(scale=3):
                 # Output section
-                gr.Markdown("### 📋 Results")
+                gr.Markdown("### Results")
                 
                 status_output = gr.Textbox(
                     label="Processing Status",
@@ -183,11 +183,11 @@ def create_interface():
                 
                 with gr.Row():
                     latex_download = gr.File(
-                        label="📄 Download Standardized LaTeX",
+                        label=" Download Standardized LaTeX",
                         interactive=False
                     )
                     bibtex_download = gr.File(
-                        label="📚 Download BibTeX File",
+                        label=" Download BibTeX File",
                         interactive=False
                     )
         
@@ -201,7 +201,7 @@ def create_interface():
         # Example section
         with gr.Row():
             gr.Markdown("""
-            ### 💡 Example LaTeX citations:
+            ### Example LaTeX citations:
             ```latex
             \\cite{123456}                    % InspireHEP record ID
             \\cite{Dumitrescu:2025vfp}       % InspireHEP BibTeX key
