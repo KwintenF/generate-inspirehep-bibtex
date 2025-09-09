@@ -9,15 +9,33 @@ class LaTeXParser:
         
     def extract_citations(self, latex_content: str) -> List[str]:
         """Extract all citation keys from LaTeX content."""
-        matches = self.cite_pattern.findall(latex_content)
+        # Remove comments first (lines starting with % or inline comments)
+        lines = latex_content.split('\n')
+        cleaned_lines = []
+        for line in lines:
+            # Remove inline comments (% and everything after, unless escaped \%)
+            comment_pos = line.find('%')
+            while comment_pos != -1:
+                if comment_pos == 0 or line[comment_pos - 1] != '\\':
+                    line = line[:comment_pos]
+                    break
+                else:
+                    # Find next % that's not escaped
+                    comment_pos = line.find('%', comment_pos + 1)
+            cleaned_lines.append(line)
+        
+        cleaned_content = '\n'.join(cleaned_lines)
+        matches = self.cite_pattern.findall(cleaned_content)
         
         # Handle multiple citations in single \cite{key1,key2,key3}
         all_keys = []
         for match in matches:
-            keys = [key.strip() for key in match.split(',')]
+            keys = [key.strip() for key in match.split(',') if key.strip()]
             all_keys.extend(keys)
         
-        return list(set(all_keys))  # Remove duplicates
+        # Filter out empty keys and remove duplicates
+        filtered_keys = [key for key in all_keys if key]
+        return list(set(filtered_keys))
     
     def extract_bibliography_name(self, latex_content: str) -> Optional[str]:
         """Extract bibliography filename from \bibliography{filename} command."""

@@ -49,7 +49,12 @@ class InspireHEPClient:
             })
             
             if response.status_code == 200:
-                data = response.json()
+                try:
+                    data = response.json()
+                except (ValueError, json.JSONDecodeError) as e:
+                    print(f"Error parsing JSON response for arXiv {arxiv_id}: {str(e)}")
+                    return None
+                    
                 hits = data.get('hits', {}).get('hits', [])
                 
                 if hits:
@@ -80,7 +85,12 @@ class InspireHEPClient:
             })
             
             if response.status_code == 200:
-                data = response.json()
+                try:
+                    data = response.json()
+                except (ValueError, json.JSONDecodeError) as e:
+                    print(f"Error parsing JSON response for BibTeX key {bibtex_key}: {str(e)}")
+                    return None
+                    
                 hits = data.get('hits', {}).get('hits', [])
                 
                 if hits:

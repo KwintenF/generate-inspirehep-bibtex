@@ -8,6 +8,7 @@ from .latex_parser import LaTeXParser
 from .key_identifier import KeyIdentifier, KeyType
 from .inspirehep_client import InspireHEPClient
 from .bibtex_manager import BibTeXManager
+from .bibtex_processor import BibTeXProcessor
 from .app import BibTeXGeneratorApp, create_interface
 
 __version__ = "1.0.0"
@@ -19,6 +20,7 @@ __all__ = [
     "KeyType",
     "InspireHEPClient",
     "BibTeXManager",
+    "BibTeXProcessor",
     "BibTeXGeneratorApp",
     "create_interface"
 ]

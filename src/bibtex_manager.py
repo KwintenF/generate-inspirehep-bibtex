@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict, Optional, Tuple
 
 class BibTeXManager:
     def __init__(self):
@@ -46,10 +46,11 @@ class BibTeXManager:
         try:
             with open(output_path, 'w', encoding='utf-8') as f:
                 f.write("% BibTeX file generated from InspireHEP\n")
-                f.write("% Generated using generate-inspirehep-bibtex\n\n")
+                f.write("% Generated using generate-inspirehep-bibtex\n")
+                f.write("% All citation keys have been standardized to InspireHEP format\n\n")
                 
                 for key, bibtex in bibtex_entries.items():
-                    f.write(f"% Entry for key: {key}\n")
+                    f.write(f"% Entry for standardized key: {key}\n")
                     f.write(bibtex.strip())
                     f.write("\n\n")
             
@@ -57,6 +58,37 @@ class BibTeXManager:
             
         except Exception as e:
             raise Exception(f"Error writing BibTeX file: {str(e)}")
+    
+    def write_latex_and_bibtex_files(self,
+                                    bibtex_entries: Dict[str, str],
+                                    latex_content: str,
+                                    latex_filename: str,
+                                    bib_filename: str,
+                                    output_dir: str = ".") -> Tuple[str, str]:
+        """
+        Write both standardized LaTeX and BibTeX files.
+        
+        Returns:
+            Tuple of (latex_path, bibtex_path)
+        """
+        # Create output directory if it doesn't exist
+        Path(output_dir).mkdir(parents=True, exist_ok=True)
+        
+        # Write BibTeX file
+        bibtex_path = self.write_bibtex_file(bibtex_entries, bib_filename, output_dir)
+        
+        # Write LaTeX file
+        latex_path = Path(output_dir) / latex_filename
+        try:
+            with open(latex_path, 'w', encoding='utf-8') as f:
+                f.write("% LaTeX file with standardized InspireHEP citation keys\n")
+                f.write("% Generated using generate-inspirehep-bibtex\n\n")
+                f.write(latex_content)
+            
+            return str(latex_path), bibtex_path
+            
+        except Exception as e:
+            raise Exception(f"Error writing LaTeX file: {str(e)}")
     
     def get_summary(self, bibtex_entries: Dict[str, str], 
                    unknown_keys: list = None) -> str:
