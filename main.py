@@ -11,8 +11,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 from src.app import create_interface
 
 if __name__ == "__main__":
-    print("🚀 Starting InspireHEP BibTeX Generator...")
-    print("📱 Open your browser to: http://127.0.0.1:7860")
+    print(" Starting InspireHEP BibTeX Generator...")
+    print(" Open your browser to: http://127.0.0.1:7860")
     
     interface = create_interface()
     interface.launch(
