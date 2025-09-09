@@ -2,16 +2,16 @@
 
 A Python tool that automatically extracts citations from LaTeX files and generates clean, standardized BibTeX files using the InspireHEP database. The tool handles deduplication, key standardization, and outputs both a cleaned BibTeX file and a standardized LaTeX file.
 
-## 🚀 Features
+## Features
 
 - **Multiple Citation Formats**: Supports InspireHEP record IDs, InspireHEP BibTeX keys, and arXiv identifiers
 - **Automatic Deduplication**: Detects and removes duplicate entries from different citation formats
 - **Key Standardization**: Converts all citation keys to InspireHEP BibTeX format (e.g., `Author:YEARxxx`)
 - **LaTeX File Generation**: Creates a new LaTeX file with standardized citation keys
 - **Web Interface**: User-friendly Gradio interface for easy file processing
-- **Comprehensive Testing**: Full test suite with unit tests for all components
+- **Comprehensive Testing**: test suite with unit tests
 
-## 📋 Supported Citation Types
+## Supported Citation Types
 
 | Format | Example | Description |
 |--------|---------|-------------|
@@ -22,7 +22,7 @@ A Python tool that automatically extracts citations from LaTeX files and generat
 | arXiv with Prefix | `\cite{arXiv:2301.12345}` | arXiv IDs with explicit prefix |
 | arXiv with Version | `\cite{2301.12345v2}` | Versioned arXiv identifiers |
 
-## 🛠 Installation
+## Installation
 
 ### Prerequisites
 - Python 3.8+
@@ -35,10 +35,9 @@ pip install -r requirements.txt
 
 ### Required Packages
 - `requests` - For InspireHEP API calls
-- `gradio` - Web interface
-- `bibtexparser` - BibTeX file processing
+- `gradio` - interface
 
-## 🎯 Quick Start
+## Quick Start
 
 ### Command Line Interface
 ```bash
@@ -53,7 +52,7 @@ This will start the Gradio web interface at `http://127.0.0.1:7860`
 3. Click "🚀 Generate Files"
 4. Download the standardized LaTeX and BibTeX files
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 generate-inspirehep-bibtex/
@@ -81,7 +80,7 @@ generate-inspirehep-bibtex/
 └── README.md                    # This file
 ```
 
-## 🔄 How It Works
+## How It Works
 
 ### 1. Citation Extraction
 The tool scans your LaTeX file for `\cite{}` commands and extracts all citation keys:
@@ -143,7 +142,7 @@ The framework in \cite{Dumitrescu:2025vfp} confirms this.
 }
 ```
 
-## 🧪 Testing
+## Testing
 
 Run the comprehensive test suite:
 
@@ -161,9 +160,8 @@ python tests/test_inspirehep_client.py
 - **Key Identification**: Tests all citation format recognition
 - **LaTeX Parsing**: Tests citation extraction and bibliography detection
 - **API Client**: Tests InspireHEP API interactions (with mocking)
-- **Integration**: Tests against real example files
 
-## 📝 Example Files
+## Example Files
 
 The `examples/` directory contains sample LaTeX files for testing:
 
@@ -172,7 +170,7 @@ The `examples/` directory contains sample LaTeX files for testing:
 - **`edge_cases.tex`**: Problematic citations, version numbers, formatting issues
 - **`bibtex_keys.tex`**: Focus on InspireHEP BibTeX key format
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 - `SKIP_INTEGRATION_TESTS=true`: Skip tests that make real API calls
@@ -180,7 +178,7 @@ The `examples/` directory contains sample LaTeX files for testing:
 ### API Rate Limiting
 The tool includes built-in rate limiting (0.1s delay between API calls) to be respectful to the InspireHEP API.
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -188,17 +186,17 @@ The tool includes built-in rate limiting (0.1s delay between API calls) to be re
 4. Ensure all tests pass
 5. Submit a pull request
 
-## 📄 License
+## License
 
 This project is open source. Please check the license file for details.
 
-## 🙋 Support
+## Support
 
 - **Issues**: Report bugs and request features via GitHub Issues
 - **Documentation**: Check the `examples/` directory for usage examples
 - **API Reference**: InspireHEP API documentation at https://inspirehep.net/help/api
 
-## 🎯 Use Cases
+## Use Cases
 
 - **Academic Writing**: Clean up bibliography management in research papers
 - **Collaboration**: Standardize citation formats across team projects
@@ -207,4 +205,6 @@ This project is open source. Please check the license file for details.
 
 ---
 
-**Generated with InspireHEP BibTeX Generator** 📚✨
+**Generated with InspireHEP BibTeX Generator**
+
+*Developed with assistance from Claude (Anthropic)*
